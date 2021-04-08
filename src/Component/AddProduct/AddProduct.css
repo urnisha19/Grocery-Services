@@ -1,0 +1,12 @@
+.add-Product{
+    border: 3px solid lightblue;
+    margin:10px;
+    padding: 5px;
+    text-align:justify;
+}
+.submit-btn{
+    background-color: lightblue;
+    font-weight: 500;
+    border-radius:3px;
+    border:none;
+}
