@@ -4,30 +4,27 @@ import { useForm } from "react-hook-form"
 import './AddProduct.css';
 
 const AddProduct = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, watch, errors } = useForm();
     const [imageURL, setIMageURL] = useState(null);
 
-    const onSubmit = data => {
+    const onSubmit = (data) => {
         const productData = {
-            name: data.value_name,
-            weight: data.value_weight,
-            price: data.value_price,
+            name: data.name,
+            weight: data.weight,
+            price: data.price,
             imageURL: imageURL
         };
-        const url = `https://warm-dusk-99296.herokuapp.com/addProduct`;
 
+        const url = `https://warm-dusk-99296.herokuapp.com/addProduct`;
         fetch(url, {
             method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
+            headers: { 'content-type': 'application/json' },
             body: JSON.stringify(productData)
         })
             .then(res => console.log('server side response', res))
     };
 
     const handleImageUpload = product => {
-        console.log(product.target.files[0])
         const imageData = new FormData();
         imageData.set('key', 'e42c992b0cd0b74ccee4110ad7eefc6d');
         imageData.append('image', product.target.files[0]);
@@ -38,18 +35,18 @@ const AddProduct = () => {
                 setIMageURL(response.data.data.display_url);
             })
             .catch(error => {
-                console.log(error);
+                console.log('error', error);
             });
     }
 
     return (
         <div className="add-Product">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <label>Product Name: <input required name="name" defaultValue="New Product" {...register('value_name')} /></label>
+                <label>Product Name: <input required name="name" defaultValue="New Product" ref={register({ required: true })} /></label>
                 <br />
-                <label>Weight: <input required name="weight" defaultValue="0.00" {...register('value_weight')} /></label>
+                <label>Weight: <input required name="weight" defaultValue="0.00" ref={register({ required: true })} /></label>
                 <br />
-                <label>Price: $<input required name="price" defaultValue="0.00" {...register('value_price')} /></label>
+                <label>Price: $<input required name="price" defaultValue="0.00" ref={register({ required: true })} /></label>
                 <br />
                 <label>Product Image: <input name="exampleRequired" type="file" onChange={handleImageUpload} /></label>
                 <br />

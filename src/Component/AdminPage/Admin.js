@@ -5,8 +5,9 @@ import logo from '../../images/logo.jpg';
 import manage from '../../images/icons/grid 1.png';
 import addProduct from '../../images/icons/plus 1.png';
 import deleteIcon from '../../images/icons/trash.png';
-import './Admin.css';
 import AddProduct from '../AddProduct/AddProduct';
+import Header from '../Header/Header';
+import './Admin.css';
 
 const Admin = () => {
     const [productList, setProductList] = useState([]);
@@ -35,6 +36,7 @@ const Admin = () => {
 
     return (
         <Container>
+            <Header />
             <div className="row side-nav">
                 <div className="col-md-3 d-flex flex-column">
                     <Link to="/home">

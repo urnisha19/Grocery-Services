@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../Header/Header';
 
 const NotMatch = () => {
     const notMatchStyle = {
@@ -12,10 +13,15 @@ const NotMatch = () => {
         borderRadius: '5px'
     }
     return (
-        <div style={notMatchStyle}>
-            <h2>404 Error!!!</h2>
-            <h2>Route Not Found!!!</h2>
+        <div>
+            <Header />
+            <div style={notMatchStyle}>
+                <h2>404 Error!!!</h2>
+                <h2>Route Not Found!!!</h2>
+            </div>
         </div>
+
+
     );
 };
 

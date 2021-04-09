@@ -4,10 +4,10 @@ import { UserContext } from '../../App';
 import { Button } from 'react-bootstrap';
 import orderedImg from '../../images/Products/ordered.jpeg';
 import Header from '../Header/Header';
+import './Orders.css';
 
 const Orders = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
@@ -19,12 +19,14 @@ const Orders = () => {
             }
         })
             .then(res => res.json())
-            .then(data => setOrders(data))
+            .then(data => {
+                setOrders(data)
+            })
     }, [])
 
     const deleteOrder = (id) => {
         console.log('clicked', id)
-        fetch(`https://warm-dusk-99296.herokuapp.com/delete/${id}`, {
+        fetch(`https://warm-dusk-99296.herokuapp.com/deleteOrder/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -48,16 +50,17 @@ const Orders = () => {
                     <div className="row my-5">
                         {
                             orders.map(order =>
-                                <div className="col-xl-6 col-lg-6 col-md-6 single-orders my-3" key={orders._id}>
+                                <div className="col-xl-6 col-lg-6 col-md-6 single-orders my-3" key={order._id}>
                                     <div className="orders-info row">
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <img src={orderedImg} alt="" className="img-fluid max-width: 50% height: 50%" />
                                             </div>
                                             <div className="col-md-6" >
-                                                <h5>{order.productName}</h5>
-                                                <h6><b>Date:</b> {new Date(order.date).toDateString('dd/MM/yyyy')}</h6>
-                                                <p><b>Quantity:</b> {order.quantity}</p>
+                                                <h5>Date:{new Date(order.date).toDateString('dd/MM/yyyy')}</h5>
+                                                <p><b>Product:</b> {order.productName}</p>
+                                                <p><b>Quantity:</b> {order.productQuantity}</p>
+                                                <p><b>Price:</b> {order.productPrice}</p>
                                                 <Button onClick={() => deleteOrder(order._id)} variant="light">Cancel</Button>
                                             </div>
                                         </div>

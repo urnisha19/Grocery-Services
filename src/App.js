@@ -25,7 +25,7 @@ const App = () => {
           <Route path="/home">
             <Home />
           </Route>
-          <PrivateRoute path="/orderCheckoutPage/:productId">
+          <PrivateRoute path="/checkout/product/:productId">
             <CheckOut />
           </PrivateRoute>
           <Route path="/login">

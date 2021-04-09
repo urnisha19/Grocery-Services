@@ -11,11 +11,9 @@ import './Login.css';
 
 const Login = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-
     const history = useHistory();
     const location = useLocation();
     const { from } = location.state || { from: { pathname: "/" } };
-
     const [user, setUser] = useState({
         isSignedIn: false,
         displayName: '',
@@ -27,7 +25,6 @@ const Login = () => {
     }
     const googleSignIn = () => {
         const googleProvider = new firebase.auth.GoogleAuthProvider();
-
         firebase.auth().signInWithPopup(googleProvider)
             .then(res => {
                 const { displayName, email } = res.user;
@@ -42,8 +39,8 @@ const Login = () => {
                 history.replace(from);
             })
             .catch(error => {
-                console.log(error);
-                console.log(error.message);
+                console.log('error', error);
+                console.log('error.message', error.message);
             });
     }
     const handleSignOut = () => {
@@ -58,18 +55,17 @@ const Login = () => {
                 setLoggedInUser(signedOutUser);
             })
             .catch(error => {
-                console.log(error)
+                console.log('error', error)
             })
     }
     // JWT token 
-    const storeAuthToken=()=>{
-        firebase.auth().currentUser.getIdToken( true)
-        .then(function(idToken) {
-            console.log(idToken)
-            sessionStorage.setItem('token',idToken);
-          }).catch(function(error) {
-            // Handle error
-          });
+    const storeAuthToken = () => {
+        firebase.auth().currentUser.getIdToken(true)
+            .then(function (idToken) {
+                sessionStorage.setItem('token', idToken);
+            }).catch(function (error) {
+                // Handle error
+            });
     }
     return (
         <div className="custom-container">
@@ -81,7 +77,7 @@ const Login = () => {
                 </div>
                 <div className="text-center">
                     <Link to="/home">
-                        <img src={logo} alt="logo" className="w-25"/>
+                        <img src={logo} alt="logo" className="w-25" />
                     </Link>
                 </div>
                 <div className="login-box col-md-6 offset-md-3">

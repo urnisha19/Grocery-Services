@@ -9,17 +9,12 @@ const AllProducts = () => {
         fetch('https://warm-dusk-99296.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProducts(data))
-    }, [])
-
-    const [checkout, setCheckout] = useState([]);
-
-    const handleCheckout = (id) => {
-        setCheckout(products);
-    }
+    }, [])  
+    
     return (
         <div className="products row my-5">
             {
-                products.map(product => <Product product={product} key={product._id} handleCheckout={handleCheckout}></Product>)
+                products.map(product => <Product key={product._id} product={product}></Product>)
             }
         </div>
     );
