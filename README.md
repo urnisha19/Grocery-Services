@@ -1,3 +1,4 @@
+Hosting URL: https://grocery-f62c8.web.app
 # Grocery Service
 
 ## Features:
